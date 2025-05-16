@@ -12,7 +12,9 @@ http.route({
     path:"/clerk-webhook",
     method:"POST",
     handler:httpAction(async (ctx , request)=>{
-        const webhookSecret="whsec_u391FdrAN2D8MH4f4GHzyc6U7dcJNymp" 
+        const webhookSecret=process.env.CLERK_WEBHOOK_SECRET_KEY;
+        console.log("Loaded webhook secret:", webhookSecret);
+
         if(!webhookSecret)
         {
             throw new Error("Missing clerk webhook secret key ");
