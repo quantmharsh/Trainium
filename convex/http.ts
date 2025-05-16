@@ -12,10 +12,10 @@ http.route({
     path:"/clerk-webhook",
     method:"POST",
     handler:httpAction(async (ctx , request)=>{
-        const webhookSecret= process.env.CLERK_WEBHOOK_SECRET;
+        const webhookSecret="whsec_u391FdrAN2D8MH4f4GHzyc6U7dcJNymp" 
         if(!webhookSecret)
         {
-            throw new Error("Missong clerk webhook secret key ");
+            throw new Error("Missing clerk webhook secret key ");
         }
         const svix_id =request.headers.get("svix-id");
         const svix_signature=request.headers.get("svix-signature");
@@ -61,6 +61,7 @@ http.route({
                     image:image_url ,
                     clerkId:id
                  }) 
+                  console.log("user Synced through clerk");
 
             } catch (error) {
                  console.log("Error creating user:", error);
@@ -83,6 +84,7 @@ http.route({
                 name,
                 image:image_url,
                });
+                console.log("user updated through clerk");
                 
             } catch (error) {
                 console.log("Error updating  user",error);
@@ -91,6 +93,24 @@ http.route({
                 })
             }
             
+        }
+
+        if(eventType==="user.deleted")
+        {
+            const {id}=evt.data;
+            try {
+                await ctx.runMutation(api.users.deleteUser,{
+                    clerkId:id as string
+                
+                })
+                console.log("user deleted through clerk");
+            } catch (error) {
+                console.log("Error occured while deleting user" ,error);
+                return new Response ("Error Updating user:"  ,{
+                    status:500
+                });
+                
+            }
         }
            return new Response("Webhooks processed successfully", { status: 200 });
     })
