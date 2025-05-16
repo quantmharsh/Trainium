@@ -21,37 +21,35 @@ export const syncUser = mutation({
     }
 })
 
-export const updateUser=mutation({
-    args:{
-        name:v.string(),
-        email:v.string(),
-        clerkId:v.string(),
-        image:v.optional(v.string()),
+export const updateUser = mutation({
+    args: {
+        name: v.string(),
+        email: v.string(),
+        clerkId: v.string(),
+        image: v.optional(v.string()),
     },
-    handler:async(ctx , args)=>{
-        const existingUser= await ctx.db.query("users").withIndex("by_clerk_id" ,(q)=>q.eq("clerkId" ,args.clerkId)).first();
+    handler: async (ctx, args) => {
+        const existingUser = await ctx.db.query("users").withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId)).first();
 
-        if(!existingUser)
-        {
-            
+        if (!existingUser) {
+
             return;
         }
-        return await ctx.db.patch(existingUser._id , args);
+        return await ctx.db.patch(existingUser._id, args);
     }
 
 });
-export const deleteUser=mutation({
-    args:{
-        clerkId:v.string(),
+export const deleteUser = mutation({
+    args: {
+        clerkId: v.string(),
     },
-    handler:async(ctx , args)=>{
-        const  getUser= await ctx.db.query("users").withIndex("by_clerk_id" , (q)=>q.eq("clerkId", args.clerkId)).first();
+    handler: async (ctx, args) => {
+        const getUser = await ctx.db.query("users").withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId)).first();
 
-        if(!getUser)
-        {
-            return ;
+        if (!getUser) {
+            return;
         }
-         return await ctx.db.delete(getUser._id);
-        
+        return await ctx.db.delete(getUser._id);
+
     }
 })
