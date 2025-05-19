@@ -38,7 +38,7 @@ export default function RootLayout({
 
           <main className="pt-24 flex-grow">{children}</main>
       </body>
-    </html>
+    </html> 
      </ConvexClerkProvider>
     
   );
