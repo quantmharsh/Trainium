@@ -2,7 +2,7 @@ export const USER_PROGRAMS = [
     {
         id: 1,
         first_name: "Rohit",
-        profilePic: "https://randomuser.me/api/portraits/men/74.jpg",
+        profilePic: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Prime_Minister_Of_Bharat_Shri_Narendra_Damodardas_Modi_with_Shri_Rohit_Gurunath_Sharma_%28Cropped%29.jpg/500px-Prime_Minister_Of_Bharat_Shri_Narendra_Damodardas_Modi_with_Shri_Rohit_Gurunath_Sharma_%28Cropped%29.jpg",
         fitness_goal: "Weight Loss",
         height: "5'6\"",
         weight: "165 lbs",
@@ -40,7 +40,7 @@ export const USER_PROGRAMS = [
     {
         id: 2,
         first_name: "Yuzvendra",
-        profilePic: "https://randomuser.me/api/portraits/men/75.jpg",
+        profilePic: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Yuzvendra_Chahal_in_PMO_New_Delhi.jpg/500px-Yuzvendra_Chahal_in_PMO_New_Delhi.jpg",
         fitness_goal: "Muscle Gain",
         height: "5'10\"",
         weight: "170 lbs",
@@ -79,7 +79,7 @@ export const USER_PROGRAMS = [
     {
         id: 3,
         first_name: "Kohli",
-        profilePic: "https://randomuser.me/api/portraits/men/76.jpg",
+        profilePic: "https://media.gettyimages.com/id/2159843270/photo/bridgetown-barbados-virat-kohli-of-india-interacts-with-his-phone-following-victory-after-the.jpg?s=612x612&w=0&k=20&c=NoEyTGGepXJVRu1IwudD5tXlcRg42z3SLJlnmgRpUWg=",
         fitness_goal: "General Fitness",
         height: "5'4\"",
         weight: "130 lbs",
@@ -100,7 +100,7 @@ export const USER_PROGRAMS = [
                 "This program focuses on functional movement patterns that improve everyday performance while being gentle on the knees. Emphasis is on core strength, mobility, and cardiovascular health.",
         },
         diet_plan: {
-            title: "Balanced Vegetarian Nutrition",
+            title: "Balanced Vegetarian Nutrition Plan (Sugar-Free)  ",
             daily_calories: "1,800 calories",
             macros: { protein: "25%", carbs: "50%", fats: "25%" },
             meal_examples: [
