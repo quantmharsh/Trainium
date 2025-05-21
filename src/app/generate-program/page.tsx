@@ -1,3 +1,4 @@
+import { vapi } from '@/lib/vapi';
 import { useUser } from '@clerk/nextjs';
 import { redirect, useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
@@ -34,7 +35,76 @@ const GenerateProgramPage
         return () => clearTimeout(redirectTimer);
       }
 
-    }, [callEnded, router])
+    }, [callEnded, router]);
+
+
+    //  Setup event listeners for vapi 
+    useEffect(() => {
+
+      const handleCallStart =()=>{
+        console.log("Call Started");
+        setConnecting(false);
+        setCallActive(true);
+        setCallEnded(false);
+        
+      }
+      const handleCallEnd =()=>{
+        console.log("Call Ended");
+        setCallActive(false);
+        setCallEnded(true);
+        setConnecting(false);
+        setIsSpeaking(false);
+      }
+
+      const handleSpeechStart =()=>{
+        console.log("AI  Agent Started Speaking");
+        setIsSpeaking(true);
+      }
+      const handleSpeechEnd=()=>{
+        console.log("AI Agent stopped speaking");
+        setIsSpeaking(false);
+      }
+      const handleMessage =(message:any)=>{
+        if(message.type=== "transcript" && message.transcriptType==="final")
+        {
+          const newMessage = {content:message.transcript , role:message.role};
+          setMessages((prev:any)=>[...prev , newMessage]);
+        }
+
+      };
+
+
+      const handleError=(error:any)=>{
+        console.log("Vapi Error" ,error);
+        setConnecting(false);
+        setCallActive(false);
+      };
+
+
+      vapi.on("call-start" , handleCallStart)
+      .on("call-end", handleCallEnd)
+      .on("speech-start" , handleSpeechStart)
+      .on("speech-end" , handleSpeechEnd)
+      .on("message", handleMessage)
+      .on("error" , handleError);
+
+      //cleanup event listeners on unmount 
+      return ()=>{
+
+          vapi
+        .off("call-start", handleCallStart)
+        .off("call-end", handleCallEnd)
+        .off("speech-start", handleSpeechStart)
+        .off("speech-end", handleSpeechEnd)
+        .off("message", handleMessage)
+        .off("error", handleError);
+      }
+     
+    }, [])
+    
+
+
+
 
     return (
       <div>
