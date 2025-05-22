@@ -100,7 +100,39 @@ const GenerateProgramPage
         .off("error", handleError);
       }
      
-    }, [])
+    }, []);
+
+    const toggleCall =async ()=>{
+      if(callActive)
+      {
+        vapi.stop();
+      }
+      else{
+        try {
+           setConnecting(true);
+           setMessages([]);
+           setCallEnded(false);
+           const fullName = user?.firstName
+          ? `${user.firstName} ${user.lastName || ""}`.trim()
+          : "There";
+           await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+          clientMessages: [],
+          serverMessages: [],
+          variableValues: {
+            full_name: fullName,
+            user_id: user?.id,
+          },
+        });
+
+
+        } catch (error) {
+            console.log("Failed to start call", error);
+        setConnecting(false);
+          
+        }
+      }
+
+    }
     
 
 
