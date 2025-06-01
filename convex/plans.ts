@@ -42,6 +42,7 @@ export const createPlan=mutation({
             await ctx.db.patch(plan._id, {isActive:false});
         }
         const planId=await ctx.db.insert("plans", args);
+        return  planId;
 
     }
 });
