@@ -3,9 +3,10 @@ import { httpAction } from "./_generated/server";
 import { Webhook } from "svix";
 import { EmailAddress, WebhookEvent } from "@clerk/nextjs/server";
 import { api } from "./_generated/api";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 
-
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 //setting up webhook from clerk to convex 
 const http = httpRouter();
 http.route({
@@ -135,6 +136,17 @@ http.route({
       } = payload;
 
       console.log("Payload :" , payload);
+
+
+const model = genAI.getGenerativeModel({
+        model: "gemini-2.0-flash-001",
+        generationConfig: {
+          temperature: 0.4, // lower temperature for more predictable outputs
+          topP: 0.9,
+          responseMimeType: "application/json",
+        },
+      });
+
         } catch (error) {
 
                console.error("Error generating fitness plan:", error);
