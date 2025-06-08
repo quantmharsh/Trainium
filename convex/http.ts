@@ -205,7 +205,12 @@ function validateWorkoutPlan(plan: any) {
       }
       
       DO NOT add any fields that are not in this example. Your response must be a valid JSON object with no additional text.`;
+   const workoutResult = await model.generateContent(workoutPrompt);
+      const workoutPlanText = workoutResult.response.text();
 
+      // VALIDATE THE INPUT COMING FROM AI
+      let workoutPlan = JSON.parse(workoutPlanText);
+      workoutPlan = validateWorkoutPlan(workoutPlan);
       
 const dietPrompt = `You are an experienced nutrition coach creating a personalized diet plan based on:
         Age: ${age}
