@@ -163,6 +163,20 @@ function validateWorkoutPlan(plan: any) {
   return validatedPlan;
 }
 
+
+// validate diet plan to ensure it strictly follows schema
+function validateDietPlan(plan: any) {
+  // only keep the fields we want
+  const validatedPlan = {
+    dailyCalories: plan.dailyCalories,
+    meals: plan.meals.map((meal: any) => ({
+      name: meal.name,
+      foods: meal.foods,
+    })),
+  };
+  return validatedPlan;
+}
+
        const workoutPrompt = `You are an experienced fitness coach creating a personalized workout plan based on:
       Age: ${age}
       Height: ${height}
