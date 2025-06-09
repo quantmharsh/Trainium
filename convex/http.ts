@@ -265,6 +265,19 @@ const dietPrompt = `You are an experienced nutrition coach creating a personaliz
 
       const dietResult = await model.generateContent(dietPrompt);
       const dietPlanText = dietResult.response.text();
+       // VALIDATE THE INPUT COMING FROM AI
+      let dietPlan = JSON.parse(dietPlanText);
+      dietPlan = validateDietPlan(dietPlan);
+            // save to our DB: CONVEX
+            
+      const planId = await ctx.runMutation(api.plans.createPlan, {
+        userId: user_id,
+        dietPlan,
+        isActive: true,
+        workoutPlan,
+        name: `${fitness_goal} Plan - ${new Date().toLocaleDateString()}`,
+      });
+
         } catch (error) {
 
                console.error("Error generating fitness plan:", error);
