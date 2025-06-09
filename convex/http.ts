@@ -277,6 +277,21 @@ const dietPrompt = `You are an experienced nutrition coach creating a personaliz
         workoutPlan,
         name: `${fitness_goal} Plan - ${new Date().toLocaleDateString()}`,
       });
+      
+         return new Response(
+        JSON.stringify({
+          success: true,
+          data: {
+            planId,
+            workoutPlan,
+            dietPlan,
+          },
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
         } catch (error) {
 
