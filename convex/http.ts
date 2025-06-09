@@ -117,7 +117,7 @@ http.route({
 
 
 http.route({
-    path:"vapi/generate-program",
+    path:"/vapi/generate-program",
     method:"POST",
     handler: httpAction(async(ctx , request)=>{
         try {
@@ -268,30 +268,31 @@ const dietPrompt = `You are an experienced nutrition coach creating a personaliz
        // VALIDATE THE INPUT COMING FROM AI
       let dietPlan = JSON.parse(dietPlanText);
       dietPlan = validateDietPlan(dietPlan);
+      return new Response()
             // save to our DB: CONVEX
             
-      const planId = await ctx.runMutation(api.plans.createPlan, {
-        userId: user_id,
-        dietPlan,
-        isActive: true,
-        workoutPlan,
-        name: `${fitness_goal} Plan - ${new Date().toLocaleDateString()}`,
-      });
-      
-         return new Response(
-        JSON.stringify({
-          success: true,
-          data: {
-            planId,
-            workoutPlan,
-            dietPlan,
-          },
-        }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      // const planId = await ctx.runMutation(api.plans.createPlan, {
+      //   userId: user_id,
+      //   dietPlan,
+      //   isActive: true,
+      //   workoutPlan,
+      //   name: `${fitness_goal} Plan - ${new Date().toLocaleDateString()}`,
+      // });
+
+      //    return new Response(
+      //   JSON.stringify({
+      //     success: true,
+      //     data: {
+      //       planId,
+      //       workoutPlan,
+      //       dietPlan,
+      //     },
+      //   }),
+      //   {
+      //     status: 200,
+      //     headers: { "Content-Type": "application/json" },
+      //   }
+      // );
 
         } catch (error) {
 
