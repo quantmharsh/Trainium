@@ -146,9 +146,11 @@ const model = genAI.getGenerativeModel({
           responseMimeType: "application/json",
         },
       });
+      console.log("Gemini Model Selected"  , model);
 
 // validate and fix workout plan to ensure it has proper numeric types
 function validateWorkoutPlan(plan: any) {
+  console.log("Validating workout plan");
   const validatedPlan = {
     schedule: plan.schedule,
     exercises: plan.exercises.map((exercise: any) => ({
@@ -160,6 +162,7 @@ function validateWorkoutPlan(plan: any) {
       })),
     })),
   };
+  console.log("Validated Workout  plan " , validateDietPlan);
   return validatedPlan;
 }
 
