@@ -121,6 +121,7 @@ http.route({
     method:"POST",
     handler: httpAction(async(ctx , request)=>{
         try {
+          console.log("Getting  Payload ");
             //get the payload from request
             const payload= await request.json();
              const {
@@ -222,8 +223,10 @@ function validateDietPlan(plan: any) {
       }
       
       DO NOT add any fields that are not in this example. Your response must be a valid JSON object with no additional text.`;
+      console.log("Sending workout plan");
    const workoutResult = await model.generateContent(workoutPrompt);
       const workoutPlanText = workoutResult.response.text();
+      console.log("Got Workout plan" , workoutPlanText);
 
       // VALIDATE THE INPUT COMING FROM AI
       let workoutPlan = JSON.parse(workoutPlanText);
