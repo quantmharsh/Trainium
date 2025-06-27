@@ -118,6 +118,8 @@ const GenerateProgramPage
            const fullName = user?.firstName
           ? `${user.firstName} ${user.lastName || ""}`.trim()
           : "There";
+
+          console.log("fullName" , fullName);
            await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
           clientMessages: [],
           serverMessages: [],
