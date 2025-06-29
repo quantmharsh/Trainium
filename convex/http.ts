@@ -135,7 +135,7 @@ http.route({
         fitness_level,
         dietary_restrictions,
       } = payload;
-
+        
       console.log("Payload :" , payload);
 
 
@@ -165,7 +165,7 @@ function validateWorkoutPlan(plan: any) {
   };
   console.log("Validated Workout  plan " , validateDietPlan);
   return validatedPlan;
-}
+} 
 
 
 // validate diet plan to ensure it strictly follows schema

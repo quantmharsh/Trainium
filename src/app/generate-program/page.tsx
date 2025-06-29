@@ -145,14 +145,16 @@ const GenerateProgramPage
 
           console.log("fullName" , fullName);
           console.log("user_id" , user?.id);
-           await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
-          clientMessages: [],
-          serverMessages: [],
-          variableValues: {
-            full_name: fullName,
-            user_id: user?.id,
-          },
-        });
+          const user_id=user?.id;
+          console.log("user_id exact " , user_id);
+     await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+    clientMessages: [],
+    serverMessages: [],
+    variableValues: {
+      full_name: fullName,
+      user_id: user_id,
+    }
+  });
 
 
         } catch (error) {
