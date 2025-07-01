@@ -124,6 +124,7 @@ http.route({
           console.log("Getting  Payload ");
             //get the payload from request
             const payload= await request.json();
+            console.log("Payload before spreading" , payload);
              const {
         user_id,
         age,
