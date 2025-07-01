@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card';
 import { vapi } from '@/lib/vapi';
 import { useUser } from '@clerk/nextjs';
 import { redirect, useRouter } from 'next/navigation';
+import { unescape } from 'querystring';
 import React, { useEffect, useRef, useState } from 'react'
 
 const GenerateProgramPage
@@ -147,9 +148,8 @@ const GenerateProgramPage
           console.log("user_id" , user?.id);
           const user_id=user?.id;
           console.log("user_id exact " , user_id);
-     await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
-    clientMessages: [],
-    serverMessages: [],
+     await vapi.start( undefined,  undefined ,undefined, process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+   
     variableValues: {
       full_name: fullName,
       user_id: user_id,
