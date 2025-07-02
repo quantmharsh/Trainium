@@ -32,7 +32,7 @@ const ProfilePage = () => {
 
   return (
     <section className="relative z-10 pt-12 pb-32 flex-grow container mx-auto px-4">
-      {/* <ProfileHeader user={user} /> */}
+      <ProfileHeader user={user} />
 
       {allPlans && allPlans?.length > 0 ? (
         <div className="space-y-8">
